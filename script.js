@@ -1,26 +1,56 @@
 'use strict';
 
-// ОБЬЕДИНЕНИЕ ОБЬЕКТОВ (Поверхностное)
-
-const obj1 = { name: 'Александр' };
-
-const obj2 = {
+const user = {
+  name: 'Александр',
   age: 28,
   address: {
     city: 'Москва',
-  },
-};
-
-const obj3 = {
-  name: 'Максим',
-  isDeveloper: true,
-  address: {
     zipcode: 123456,
   },
 };
 
-const user = { ...obj1, ...obj2, ...obj3 };
+// console.log(user.address.city);
+console.log(user.address?.city); // с оператором optional chaning
+console.log('Какой-то текст');
 
-console.log('user:', user);
+const guest1 = {
+  name: 'Василий',
+  age: 30,
+  orderInfo: {
+    roomType: 2,
+    stayDates: {
+      from: '14.04.2024',
+      to: '21.04.2024',
+    },
+  },
+};
 
-//При обьединении нескольких обьектов с разными значениями (в нашем случае address), общее звено беерт значения последнего обьекта, потом будем проходить более глубокий разбор
+const guest2 = {
+  name: 'Екатерина',
+  age: 25,
+};
+
+// const logGuestInfo = (guest) => {
+//   const checkoutDate =
+//     guest.orderInfo && guest.orderInfo.stayDates && guest.orderInfo.stayDates.to
+//       ? guest.orderInfo.stayDates.to
+//       : null;
+
+//   console.log(`
+//         Имя: ${guest.name}
+//         Возраст: ${guest.age}
+//         Дата выезда: ${checkoutDate},
+//         `);
+// };
+
+//Более короткий вариант
+const logGuestInfo = (guest) => {
+  console.log(`
+        Имя: ${guest.name}
+       Возраст: ${guest.age}
+        Дата выезда: ${guest.orderInfo?.stayDates?.to ?? 'Не указана'},
+        `);
+};
+
+logGuestInfo(guest1);
+logGuestInfo(guest2);
