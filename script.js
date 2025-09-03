@@ -1,25 +1,37 @@
 'use strict';
 
-const logAddress = (city, street, houseNumber, apartmentNumber) => {
-  console.log(`
-        Адрес:
-        г.${city}, ул.${street},
-        д.${houseNumber}, кв.${apartmentNumber}`);
+const user = {
+  name: 'Александр',
 };
 
-logAddress('Москва', 'Пушкина', 21, 35);
-
-const logAddress2 = ({ city, street, houseNumber, apartmentNumber }) => {
-  console.log(`
-       Адрес:
-       г. ${city}, ул. ${street},
-        д. ${houseNumber}, кв. ${apartmentNumber}
-    `);
+const admin = {
+  name: 'Boss',
 };
 
-logAddress2({
+const { name: userName } = user;
+const { name: adminName } = admin;
+
+console.log('userName:', userName);
+console.log('adminName:', adminName);
+
+const user1 = {
+  name: 'Александр',
+  age: 28,
   city: 'Москва',
-  street: 'Пушкина',
-  houseNumber: 21,
-  apartmentNumber: 35,
-});
+};
+
+const user2 = {
+  name: 'Максим',
+  age: 5,
+};
+
+const { city = 'не указан' } = user2;
+console.log('Город:', city);
+
+const user3 = {
+  city: 'Москва',
+};
+
+const { city: userCity = 'не указано' } = user3;
+
+console.log('userCity:', userCity);
