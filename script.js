@@ -1,28 +1,15 @@
 'use strict';
 
-// 🔧 Способы поверхностного копирования
-// 1. Spread оператор (...)
-javascript;
-const original = { name: 'John', age: 30, hobbies: ['reading', 'sports'] };
-const copy = { ...original };
+// ОБЬЕДИНЕНИЕ ОБЬЕКТОВ (Поверхностное)
 
-console.log(copy); // { name: 'John', age: 30, hobbies: ['reading', 'sports'] }
-console.log(original === copy); // false
-console.log(original.hobbies === copy.hobbies); // true! (проблема)
-// 2. Object.assign()
-javascript;
-const original = { name: 'John', age: 30 };
-const copy = Object.assign({}, original);
+const obj1 = { name: 'Александр' };
+const obj2 = { age: 28 };
 
-console.log(copy); // { name: 'John', age: 30 }
-console.log(original === copy); // false
-// 3. Цикл for...in
-javascript;
-const original = { name: 'John', age: 30 };
-const copy = {};
+const user = Object.assign({}, obj1, obj2);
 
-for (let key in original) {
-  if (original.hasOwnProperty(key)) {
-    copy[key] = original[key];
-  }
-}
+console.log('user:', user);
+
+// Либо же СПРЕД- оператор, также как и при копировании
+
+const user2 = { ...obj1, ...obj2 };
+console.log('user2:', user2);
