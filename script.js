@@ -1,18 +1,25 @@
 'use strict';
 
-const user = {
-  name: 'Александр',
-  age: 28,
-  isDeveloper: true,
+const logAddress = (city, street, houseNumber, apartmentNumber) => {
+  console.log(`
+        Адрес:
+        г.${city}, ул.${street},
+        д.${houseNumber}, кв.${apartmentNumber}`);
 };
 
-// const name = user.name;
-// const age = user.age;
-// const isDeveloper = user.isDeveloper;
+logAddress('Москва', 'Пушкина', 21, 35);
 
-//для упрощения
-const { name, age, isDeveloper } = user;
+const logAddress2 = ({ city, street, houseNumber, apartmentNumber }) => {
+  console.log(`
+       Адрес:
+       г. ${city}, ул. ${street},
+        д. ${houseNumber}, кв. ${apartmentNumber}
+    `);
+};
 
-console.log('name:', name);
-console.log('age:', age);
-console.log('isDeveloper:', isDeveloper);
+logAddress2({
+  city: 'Москва',
+  street: 'Пушкина',
+  houseNumber: 21,
+  apartmentNumber: 35,
+});
