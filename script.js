@@ -1,14 +1,28 @@
 'use strict';
 
-const obj1 = { name: 'Александр' };
-// const obj2 = Object.assign({}, obj1);
-const obj2 = { ...obj1 }; //то же самое значение
+// 🔧 Способы поверхностного копирования
+// 1. Spread оператор (...)
+javascript;
+const original = { name: 'John', age: 30, hobbies: ['reading', 'sports'] };
+const copy = { ...original };
 
-for (const key in obj1) {
-  obj2[key] = obj1[key];
+console.log(copy); // { name: 'John', age: 30, hobbies: ['reading', 'sports'] }
+console.log(original === copy); // false
+console.log(original.hobbies === copy.hobbies); // true! (проблема)
+// 2. Object.assign()
+javascript;
+const original = { name: 'John', age: 30 };
+const copy = Object.assign({}, original);
+
+console.log(copy); // { name: 'John', age: 30 }
+console.log(original === copy); // false
+// 3. Цикл for...in
+javascript;
+const original = { name: 'John', age: 30 };
+const copy = {};
+
+for (let key in original) {
+  if (original.hasOwnProperty(key)) {
+    copy[key] = original[key];
+  }
 }
-
-obj2.name = 'Максим';
-
-console.log('obj1:', obj1);
-console.log('obj2:', obj2);
