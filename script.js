@@ -1,17 +1,17 @@
-const calculator = {
-  read() {
-    this.a = Number(prompt('Введите первое число:', 0));
-    this.b = Number(prompt('Введите второе число:', 0));
+let ladder = {
+  step: 0,
+  up() {
+    this.step++;
+    return this;
   },
-  sum() {
-    return this.a + this.b;
+  down() {
+    this.step--;
+    return this;
   },
-  mul() {
-    return this.a * this.b;
+  showStep() {
+    console.log('Текущая ступенька:', this.step);
+    return this;
   },
 };
 
-calculator.read();
-console.log('calculator', calculator);
-console.log('Сумма:', calculator.sum());
-console.log('Произведение:', calculator.mul());
+ladder.up().up().down().showStep().down().showStep();
