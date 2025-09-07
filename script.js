@@ -1,17 +1,21 @@
-let ladder = {
-  step: 0,
-  up() {
-    this.step++;
-    return this;
-  },
-  down() {
-    this.step--;
-    return this;
-  },
-  showStep() {
-    console.log('Текущая ступенька:', this.step);
-    return this;
-  },
-};
+const price = 99.99;
+const roundedPrice = price.toFixed(0); //(округление числа до указанного количества знаков после запятой)
 
-ladder.up().up().down().showStep().down().showStep();
+console.log('Округленная цена:', roundedPrice);
+
+const num = 100.055;
+
+console.log(num.toPrecision(4)); // (округление числа до указанного кличества до запятой)
+
+console.log('Случайное число:', Math.random());
+console.log(Math.abs(-1)); // показывает число без минуса
+console.log(Math.pow(2, 10)); //или (2**10) // возведение числа в степень (первое число, которое будем возводить, второе число-степень)
+console.log(Math.sqrt(16)); // позволяет получить квадратный корень из числа
+console.log(Math.cbrt(125)); // позволяет получить кубический корень из числа
+console.log(Math.min(1, 2, 135, 1111)); // позволяет получить наимешьее число
+console.log(Math.max(1, 2, 135, 1111)); // позволяет получить набольшее число
+
+console.log(Math.round(3.49)); // округляет до ближайшего целого числа
+console.log(Math.floor(3.49)); // округляет вниз до ближайшего целого числа
+console.log(Math.ceil(3.49)); // округляет вверх до ближайшего целого числа
+console.log(Math.trunc(3.49)); // округляет до ближайшего целого числа в меньшуу сторону
