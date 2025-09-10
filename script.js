@@ -1,118 +1,179 @@
-const arr = [
-  'Привет',
-  100,
-  true,
-  { name: 'Александр' },
-  () => console.log('👋'),
-  [1, 2, 3, 4, 5],
+const data = ['Александр', 28];
+const [name, age] = data;
+
+console.log('name:', name);
+console.log('age:', age);
+
+// ПЕРЕБИРАЕМ ЭЛЕМЕНТЫ МАССИВА FOREACH
+
+const letters = ['A', 'B', 'C', 'D', 'E'];
+for (let i = 0; i < letters.length; i++) {
+  console.log(letters[i]);
+}
+
+/** То же самое, что и ['A', 'B', 'C', 'D', 'E'].forEach(...) */
+letters.forEach((letter, index, array) => {
+  console.log(`По индексу [${index}] находится элемент "${letter}"`);
+  console.log('array:', array);
+});
+
+// НАЙТИ ИНДЕКС ЭЛЕМЕНТА МАССИВА INDEXOF
+
+const prices = [100, 200, 444, 500, 444, 777];
+console.log(prices.indexOf(444)); // 2
+
+console.log(prices.indexOf(444, 3)); // 4
+console.log(prices.lastIndexOf(444)); // 4
+
+const users = [
+  {
+    name: 'Александр',
+    age: 28,
+  },
+  {
+    name: 'Михаил',
+    age: 30,
+  },
+  {
+    name: 'Василий',
+    age: 40,
+  },
 ];
 
-const names = ['Александр', 'Михаил', 'Василий'];
-const ages = [28, 30, 32];
-const permissions = [true, false, false, false, true];
+console.log(
+  users.findIndex((user) => {
+    if (user.name === 'Василий') {
+      return true;
+    }
+  })
+);
 
-console.log(arr[3].name);
-arr[4]();
-console.log(arr[5][0]);
-//  сначала мы обращаемся к элементу массива по номеру индекса, а потом уже к тому, что конкретно интересует
+console.log(users.findIndex((user) => user.name === 'Василий')); // Укороченная версия предыдущей записи
+console.log(users.findLastIndex((user) => user.name === 'Василий')); // Последний индекс
 
-const matrix = [
-  //многомерный массив
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9],
+// ПРОВЕРЯЕМ НАЛИЧИЕ ЭЛЕМЕНТА В МАССИВЕ (Все ранее изученные + includes)
+
+const prices1 = [100, 200, 444, 500, 444, 777];
+console.log(prices1.indexOf(500) !== -1);
+console.log(prices1.lastIndexOf(500) !== -1);
+console.log(prices1.findIndex((price) => price === 500) !== -1);
+console.log(prices1.findLastIndex((price) => price === 500) !== -1);
+
+//INCLUDES
+console.log(prices1.includes(500));
+// но с его помощью мы не можем проверить более сложного элемента в массиве
+
+// МЕТОД SOME. с его помощью мы можем проверить более сложного элемента в массиве
+
+const users1 = [
+  {
+    name: 'Александр',
+    age: 28,
+  },
+  {
+    name: 'Михаил',
+    age: 30,
+  },
+  {
+    name: 'Василий',
+    age: 40,
+  },
 ];
 
-console.log(matrix[1][0]);
+console.log(users1.some((user) => user.name === 'Василий'));
 
-// массив можно поменять
-const arr1 = ['Привет', 100, true];
+// Возвращает true, если ХОТЯ БЫ ОДИН элемент удовлетворяет условию
+console.log(users1.some((user) => user.age >= 18));
+// true (все пользователи старше 18)
 
-console.log('arr before:', arr1);
+// EVERY
 
-arr1[0] = 'Пока';
-arr1[1] = 200;
-arr1[2] = false;
-arr1[3] = '1000';
+// Возвращает true, если ВСЕ элементы удовлетворяют условию
+console.log(users1.every((user) => user.age >= 18));
+// true (все пользователи старше 18)
 
-console.log('arr after:', arr1);
+// НАДО НАЙТИ КОНКРЕТНЫЙ ЭЛЕМЕНТ ПО УСЛОВИЮ !FIND!
 
-// Добавление элементов PUSH
+console.log(users1.find((user) => user.name === 'Василий'));
+// метод Find найдет лишь первый вариант, удовлетворяющий условию
 
-const letters = ['А', 'Б', 'В'];
-console.log('letters before:', letters);
+//Если надо найти все варианты !FILTER!
+console.log(users1.filter((user) => user.name === 'Василий'));
 
-letters.push('Г', 'Д');
-console.log('letters after:', letters);
+let users2 = [
+  {
+    name: 'Александр',
+    age: 28,
+    city: 'Москва',
+  },
+  {
+    name: 'Михаил',
+    age: 30,
+    city: 'Екатеринбург',
+  },
+  {
+    name: 'Василий',
+    age: 40,
+    city: 'Москва',
+  },
+  {
+    name: 'Василий',
+    age: 50,
+    city: 'Санкт-Петербург',
+  },
+];
 
-letters.unshift('Г', 'Д');
-console.log('letters after:', letters); //добавляет в начале массива
+const filteredUsers = users2.filter((city, age) => {
+  return city === 'Москва' || age < 45;
+});
 
-// Удаление элементов с конца массива и возвращение элемента POP
+console.log(filteredUsers);
 
-letters.pop();
-console.log('letters after:', letters);
+// Метод MAP - позволяет перебрать исходный массив и преобразовать его, изменив его каждый из элементов
 
-// Удаление элементов с начала массива и возвращение элемента SHIFT
-letters.shift();
-console.log('letters after:', letters);
+let users3 = users2.map((user) => {
+  return `${user.name}, ${user.age} лет, живет в г. ${user.city}`;
+});
+console.log(users3);
+// НЕ МУТИРУЕТ ИСХОДНЫЙ МАССИВ
+// Если все-таки хотим изменить первоначальный массив, делаем let, а не const
 
-// Приведение массива к строке TO STRING, JOIN
+// Хотим получить средний возраст всех пользователей
 
-const arr2 = ['Привет', 100, true];
-console.log(arr2.toString());
-console.log(arr2.join());
+let ageSum = 0;
 
-const message = 'Один, два, три, четрые, пять';
-console.log(message.split(', ').join(', '));
+for (let i = 0; i < users2.length; i++) {
+  ageSum += users2[i].age;
+}
 
-const arr3 = ['A', 'B', 'C'];
-const arr4 = arr3.slice(); //получаем копию arr3, позволяет вырезать не весь массив, а определенную ее часть
+console.log('Средний возраст пользователей:', ageSum / users2.length);
 
-console.debug('arr3:', arr3);
-console.log('arr4:', arr4);
+// То же самое можно решить с REDUCE
 
-const arr5 = arr3.slice(0, 2);
-console.log('arr5:', arr5); // A, B
+const ageSum1 = users2.reduce((accumulator, { age }) => accumulator + age, 0);
+// accumulator- хранит результат предыдущей функции (изначально там указано 0, что после функции написано), нужен для хранения суммарного возраста пользователей
 
-// ОБЬЕДИНЕНИЕ МАССИВОВ
+console.log('Средний возраст пользователей:', ageSum1 / users2.length);
 
-const a = ['A', 'B'];
-const b = ['C', 'D'];
+//REDUCERIGHT- делает тоже самое, только перебирает все элемента справа налеко
 
-const ab = [...a, ...b]; // СПРЕД-оператор
-console.log(ab);
+// REVERSE- переворачивает исходный массив
 
-const ab1 = a.concat(b); // concat
-console.log(ab1);
+const reversedUsers = users2.reverse();
 
-// СРАВНЕНИЕ МАССИВОВ
+console.log(`Массив users2 в обратном порядке:`, reversedUsers);
+//МУТИРУЕТ ИСХОДНЫЙ МАССИВ!!!
 
-const ac = ['A', 'B'];
-const bd = ['A', 'B'];
+const reversedUsers2 = [...users2].reverse(); // ДЕЛАЕМ ТАКИМ ОБРАЗОМ, ЕСЛИ НЕ ХОТИМ МУТИРОВАТЬ ИСХОДНЫЙ МАССИВ [...word]
 
-const abEqual = (acer, bder) => {
-  if (acer.length !== bder.length) {
-    return false;
-  }
-  for (let i = 0; i < acer.length; i++) {
-    const value1 = acer[i];
-    const value2 = bder[i];
+// SORT- сортирует исходный массив, меняя порядок его элементов
 
-    const areValuesArrays = Array.isArray(value1) && Array.isArray(value2);
+const names = ['Василий', 'Александр', 'Максим', 'Андрей'];
+const sortedNames = names.sort();
 
-    if (areValuesArrays) {
-      if (!abEqual(value1, value2)) {
-        return false;
-      } else {
-        continue;
-      }
-    }
-    if (value1 !== value2) {
-      return false;
-    }
-  }
-  return true;
-};
+console.log('Отсортированные имена:', sortedNames);
+// МУТИРУЕТ ИСХОДНЫЙ МАССИВ!!! ЕСЛИ НЕ ХОТИМ МУТИРОВАТЬ ИСХОДНЫЙ МАССИВ [...word]
 
-console.log(abEqual(ac, bd)); // true
+const numbers = [8, 4, 500];
+const sortedNumbers = [...numbers].sort((a, b) => a - b);
+console.log('Отсортированные числа:', sortedNumbers);
