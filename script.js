@@ -1,179 +1,144 @@
-const data = ['Александр', 28];
-const [name, age] = data;
+const user = {
+  name: 'Александр',
+  age: 28,
+  city: 'Москва',
+};
 
-console.log('name:', name);
-console.log('age:', age);
+// Цикл FOR IN для перебора
 
-// ПЕРЕБИРАЕМ ЭЛЕМЕНТЫ МАССИВА FOREACH
-
-const letters = ['A', 'B', 'C', 'D', 'E'];
-for (let i = 0; i < letters.length; i++) {
-  console.log(letters[i]);
+for (const key in user) {
+  console.log('Имя свойства:', key);
+  console.log('Значение свойства:', user[key]);
 }
 
-/** То же самое, что и ['A', 'B', 'C', 'D', 'E'].forEach(...) */
-letters.forEach((letter, index, array) => {
-  console.log(`По индексу [${index}] находится элемент "${letter}"`);
-  console.log('array:', array);
+//Имя свойства: name
+//  Значение свойства: Александр
+//  Имя свойства: age
+//  Значение свойства: 28
+//  Имя свойства: city
+//  Значение свойства: Москва
+
+// Из обьекта можем получить массив ключей
+
+const userKeys = Object.keys(user);
+console.log('userKeys:', userKeys);
+
+// userKeys: (3) ['name', 'age', 'city']
+
+userKeys.forEach((key) => {
+  console.log('Имя свойства:', key);
 });
 
-// НАЙТИ ИНДЕКС ЭЛЕМЕНТА МАССИВА INDEXOF
+// Имя свойства: name
+//  Имя свойства: age
+//  Имя свойства: city
 
-const prices = [100, 200, 444, 500, 444, 777];
-console.log(prices.indexOf(444)); // 2
+// Получаем массив его значений
 
-console.log(prices.indexOf(444, 3)); // 4
-console.log(prices.lastIndexOf(444)); // 4
+const userValues = Object.values(user);
+console.log('userValues:', userValues);
 
-const users = [
-  {
-    name: 'Александр',
-    age: 28,
-  },
-  {
-    name: 'Михаил',
-    age: 30,
-  },
-  {
-    name: 'Василий',
-    age: 40,
-  },
-];
+// userValues: (3) ['Александр', 28, 'Москва']
 
-console.log(
-  users.findIndex((user) => {
-    if (user.name === 'Василий') {
-      return true;
-    }
-  })
-);
-
-console.log(users.findIndex((user) => user.name === 'Василий')); // Укороченная версия предыдущей записи
-console.log(users.findLastIndex((user) => user.name === 'Василий')); // Последний индекс
-
-// ПРОВЕРЯЕМ НАЛИЧИЕ ЭЛЕМЕНТА В МАССИВЕ (Все ранее изученные + includes)
-
-const prices1 = [100, 200, 444, 500, 444, 777];
-console.log(prices1.indexOf(500) !== -1);
-console.log(prices1.lastIndexOf(500) !== -1);
-console.log(prices1.findIndex((price) => price === 500) !== -1);
-console.log(prices1.findLastIndex((price) => price === 500) !== -1);
-
-//INCLUDES
-console.log(prices1.includes(500));
-// но с его помощью мы не можем проверить более сложного элемента в массиве
-
-// МЕТОД SOME. с его помощью мы можем проверить более сложного элемента в массиве
-
-const users1 = [
-  {
-    name: 'Александр',
-    age: 28,
-  },
-  {
-    name: 'Михаил',
-    age: 30,
-  },
-  {
-    name: 'Василий',
-    age: 40,
-  },
-];
-
-console.log(users1.some((user) => user.name === 'Василий'));
-
-// Возвращает true, если ХОТЯ БЫ ОДИН элемент удовлетворяет условию
-console.log(users1.some((user) => user.age >= 18));
-// true (все пользователи старше 18)
-
-// EVERY
-
-// Возвращает true, если ВСЕ элементы удовлетворяют условию
-console.log(users1.every((user) => user.age >= 18));
-// true (все пользователи старше 18)
-
-// НАДО НАЙТИ КОНКРЕТНЫЙ ЭЛЕМЕНТ ПО УСЛОВИЮ !FIND!
-
-console.log(users1.find((user) => user.name === 'Василий'));
-// метод Find найдет лишь первый вариант, удовлетворяющий условию
-
-//Если надо найти все варианты !FILTER!
-console.log(users1.filter((user) => user.name === 'Василий'));
-
-let users2 = [
-  {
-    name: 'Александр',
-    age: 28,
-    city: 'Москва',
-  },
-  {
-    name: 'Михаил',
-    age: 30,
-    city: 'Екатеринбург',
-  },
-  {
-    name: 'Василий',
-    age: 40,
-    city: 'Москва',
-  },
-  {
-    name: 'Василий',
-    age: 50,
-    city: 'Санкт-Петербург',
-  },
-];
-
-const filteredUsers = users2.filter((city, age) => {
-  return city === 'Москва' || age < 45;
+userValues.forEach((value) => {
+  console.log('Значение свойства:', value);
 });
 
-console.log(filteredUsers);
+// Значение свойства: Александр
+// Значение свойства: 28
+// Значение свойства: Москва
 
-// Метод MAP - позволяет перебрать исходный массив и преобразовать его, изменив его каждый из элементов
+// Получаем обьекты в виде массива
 
-let users3 = users2.map((user) => {
-  return `${user.name}, ${user.age} лет, живет в г. ${user.city}`;
+const userEntries = Object.entries(user);
+console.log('userEntries', userEntries);
+
+// userEntries (3) [Array(2), Array(2), Array(2)]
+
+// Также можно перебрать используя forEach
+
+userEntries.forEach((userEntry) => {
+  const key = userEntry[0];
+  const value = userEntry[1];
+
+  console.log('Имя свойства:', key);
+  console.log('Значение свойства:', value);
 });
-console.log(users3);
-// НЕ МУТИРУЕТ ИСХОДНЫЙ МАССИВ
-// Если все-таки хотим изменить первоначальный массив, делаем let, а не const
 
-// Хотим получить средний возраст всех пользователей
+//Имя свойства: name
+//  Значение свойства: Александр
+//  Имя свойства: age
+//  Значение свойства: 28
+//  Имя свойства: city
+//  Значение свойства: Москва
 
-let ageSum = 0;
+// MAP
 
-for (let i = 0; i < users2.length; i++) {
-  ageSum += users2[i].age;
+const userEntries1 = Object.entries(user);
+
+const userEntriesFormatted = userEntries1.map(([key, value]) => {
+  return [key.toUpperCase(), `~~${value}~~`];
+});
+
+console.log('userEntriesFormatted:', userEntriesFormatted);
+
+// 0 : (2) ['NAME', '~~Александр~~']
+// 1 : (2) ['AGE', '~~28~~']
+// 2 : (2) ['CITY', '~~Москва~~']
+// length : 3
+
+// Если нам нужно получить из такого (в комментариях выше) обратное, нужно FROMENTRIES
+
+const userFormatted = Object.fromEntries(userEntriesFormatted);
+console.log('userFormatted:', userFormatted);
+
+// MAP
+
+//  с помощью SET добавляем элемент в коллекцию
+const data = new Map();
+data.set(1, 'Один как число'), data.set('1', 'Один как строка');
+console.log(data.get(1));
+console.log(data.get('1'));
+
+// Один как число
+// Один как строка
+
+// если хотим узнать если в коллекции элемент по определеннму ключу HAS
+
+console.log(data.has('name')); // false
+
+// но если было бы
+data.set('name', undefined); // true
+
+// Удаляет элемент DELETE точечно
+data.delete('name'); // false
+
+// Удаляет всю коллекцию целиком CLEAR
+
+data.clear();
+
+// SIZE - возвращает число/ размер
+
+console.log(data.size);
+
+// FOR OF при MAP
+
+data.set('name', 'Александр');
+data.set('age', 28);
+
+for (const key of data.keys()) {
+  console.log('key:', key);
 }
 
-console.log('Средний возраст пользователей:', ageSum / users2.length);
+for (const value of data.values()) {
+  console.log('value:', value);
+}
 
-// То же самое можно решить с REDUCE
+for (const entry of data.entries()) {
+  console.log('entry:', entry);
+}
 
-const ageSum1 = users2.reduce((accumulator, { age }) => accumulator + age, 0);
-// accumulator- хранит результат предыдущей функции (изначально там указано 0, что после функции написано), нужен для хранения суммарного возраста пользователей
+// SET - коллекция, которая хранит только значения ( каждое значение может быть только в единственном экземпляре)
 
-console.log('Средний возраст пользователей:', ageSum1 / users2.length);
-
-//REDUCERIGHT- делает тоже самое, только перебирает все элемента справа налеко
-
-// REVERSE- переворачивает исходный массив
-
-const reversedUsers = users2.reverse();
-
-console.log(`Массив users2 в обратном порядке:`, reversedUsers);
-//МУТИРУЕТ ИСХОДНЫЙ МАССИВ!!!
-
-const reversedUsers2 = [...users2].reverse(); // ДЕЛАЕМ ТАКИМ ОБРАЗОМ, ЕСЛИ НЕ ХОТИМ МУТИРОВАТЬ ИСХОДНЫЙ МАССИВ [...word]
-
-// SORT- сортирует исходный массив, меняя порядок его элементов
-
-const names = ['Василий', 'Александр', 'Максим', 'Андрей'];
-const sortedNames = names.sort();
-
-console.log('Отсортированные имена:', sortedNames);
-// МУТИРУЕТ ИСХОДНЫЙ МАССИВ!!! ЕСЛИ НЕ ХОТИМ МУТИРОВАТЬ ИСХОДНЫЙ МАССИВ [...word]
-
-const numbers = [8, 4, 500];
-const sortedNumbers = [...numbers].sort((a, b) => a - b);
-console.log('Отсортированные числа:', sortedNumbers);
+const set = new Set([1, 2, 3, 2, 3]);
+console.log(set);
