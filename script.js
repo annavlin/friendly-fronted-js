@@ -1,41 +1,45 @@
-// JSON- формат- стандартизированный формат данных в виде JS- фрагментов.
-// В качестве значений свойств JSON- обьекта могут быть строки, числа, булевые true, false-значения, null, массивы и обьекты.
-// Все строки оязательно оборачиваются в двойные кавычки
-// Висячие запятые недопустимы
-// Нужно использовать когда надо преобразовать обьект в строку
+// КЛАСС- многофункциональрый шаблон для создания обьектов, он позволяет один раз задать правило, по которым будут работать все обьекты, созданные с помощью этого класса.
+// Позволяют структурировать код и реализовывать гибкие и сложные связи в коде
 
-const user = {
-  name: 'Александр',
-  age: 28,
-  city: 'Москва',
-  address: {
-    street: 'ул.Пушкина, д.1, кв.1',
-    zipcode: 123456,
-  },
-  todos: ['sleep', 'eat', 'work', 'train', 'learn'],
-  hasCat: true,
-  yacht: null,
-};
+class Student {
+  planet = 'Земля';
+  country = 'Россия';
+  region;
 
-const userDataAsString = JSON.stringify(user); // преобразует данные JS- обьекты в JSON- обьекты в виде строки
-console.log(userDataAsString); // данные в таком виде можно отправлять на сервер
+  constructor(name, age, hasExperience) {
+    // обязательно выполняется при создании класса
+    this.name = name;
+    this.age = age;
+    this.experience = hasExperience;
+  }
 
-// Если нужно наоборот преобразовать JSON- обьект в JS- обьект
+  logAge() {
+    console.log(this.age);
+  }
 
-const parseUserData = JSON.parse(userDataAsString);
-console.log(parseUserData);
+  logName() {
+    console.log(this.name);
+  }
 
-const user1 = {
-  name: 'Александр',
-  sayHi() {
-    console.log(`Привет, ${this.name}!`);
-  },
-  car: undefined,
-};
+  isAdult() {
+    return this.age >= 18;
+  }
 
-const userDataAsString1 = JSON.stringify(user1);
-console.log(userDataAsString1); // если в преобразуемом JS- обьекте будут содержаться методы (свойства с функциями значений/ свойства со значаением underfined, то JSON.stringify не будет их учитывать, в результате будет получена только одна строка с одним свойством name )
+  isReadyToWork() {
+    return this.hasExperience;
+  }
+}
 
-const arr = ['Александр', 'Михаил', 'Василий'];
+const firstStudent = new Student('Вася', 25); // образовали первый класс
+const secondStudent = new Student('Петя', 18); // второй класс, оба этих класса - экземпляры класс Студент
 
-console.log(typeof arr);
+console.log('firstStudent:', firstStudent);
+console.log('secondStudent:', secondStudent);
+
+console.log('Имя первого студента:', firstStudent.name);
+console.log('Имя второго студента:', secondStudent.name);
+
+console.log(firstStudent);
+
+firstStudent.logAge();
+secondStudent.logAge();
