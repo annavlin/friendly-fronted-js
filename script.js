@@ -1,28 +1,54 @@
-// Отложенное выполнение кода (всплывающие окна и тд) setTimeout
+// Как словить ошибки в написании кода
 
-const logMessage = (name, age) => {
-  alert(`Привет, меня зовут ${name}, мне ${age}`);
-};
+console.log('Начало кода...');
 
-const timerID = setTimeout(logMessage, 2000, 'Вася', 21); // второй аргумент это время в милисекундах
+try {
+  // пробуем выполнить код
+} catch (error) {
+  // обрабатываем возникшую ошибку
+}
 
-// Если мы хотим преждевременно отменить действия setTimeout, то понадобится специальная фнкция clearTimeout
+console.log('Конец кода...');
 
-clearTimeout(timerID);
+// может выловить ошибку только в нормально написанном коде и не в отложенном коде
 
-// Если нужно повторять код регулярно/постоянно (например, раз в 1 сек)
+// throw- генерация кастомной ошибки
 
-const intervalID = setInterval(() => {
-  console.log('Привет!');
-}, 1000);
+try {
+  const userJSON = `{
+"age": 28
+}`;
 
-// Отменить регулярное использование кода
+  const user = JSON.parse(userJSON);
+  const { name, age } = user;
 
-clearInterval(intervalID);
+  if (!name) {
+    throw 'Имя не заполнено';
 
-console.log('Сообщение №1');
-setTimeout(() => {
-  console.log('Сообщение №2 с задержкой 0 (?) миллисекунд');
-});
-console.log('Сообщение №3');
-// нсачала выведется №1 , потом №3, а потом уже №2
+    // каждая из них отвечает за разные типы ошибок, но в основном используется Error
+    throw new Error(errorMessage);
+    throw new TypeError(errorMessage);
+    throw new SyntaxError(errorMessage);
+    throw new RangeError(errorMessage);
+  }
+
+  console.log(`
+  Привет, ${name}!
+  Твой возраст - ${age}, верно?
+  `);
+} catch (error) {
+  console.log('Возникла ошибка:', error);
+  console.log('name', error.name);
+  console.log('message', error.message);
+  console.log('stack', error.stack);
+}
+
+console.log('Конец года...');
+
+try {
+  // пытаемся выполнить код
+} catch (error) {
+  // обрабатываем возникшую ошибку
+} finally {
+  // выполняем при любом раскладе, выполняется строго последним
+}
