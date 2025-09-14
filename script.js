@@ -1,36 +1,28 @@
-// НАСЛЕДОВАНИЕ (extends)
+// Отложенное выполнение кода (всплывающие окна и тд) setTimeout
 
-class Person {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-  eat() {
-    console.log('Ем...');
-  }
-  sleep() {
-    console.log('Сплю...');
-  }
-}
+const logMessage = (name, age) => {
+  alert(`Привет, меня зовут ${name}, мне ${age}`);
+};
 
-const examplePerson = new Person('Василий', 30);
+const timerID = setTimeout(logMessage, 2000, 'Вася', 21); // второй аргумент это время в милисекундах
 
-class Developer extends Person {
-  constructor(name, age, experience) {
-    super(name, age); // вызывает конструктор родительского класса
-    this.experience = experience;
-  }
-  writeCode() {
-    console.log('Пишу код...');
-  }
-  sleep() {
-    console.log('Не хочу спать, пойду еще попишу код...');
-    this.writeCode;
-  }
-}
+// Если мы хотим преждевременно отменить действия setTimeout, то понадобится специальная фнкция clearTimeout
 
-const developerExample = new Developer('Миша', 25, 5);
+clearTimeout(timerID);
 
-console.log('Количество лет опыта:', developerExample.experience);
+// Если нужно повторять код регулярно/постоянно (например, раз в 1 сек)
 
-// С помощью классов можно писать чистый и структурированный код, решаем множетсво задач, которые можно поделить на конкретные группы, привязатть к конкретной группе и тд. Помогают чуть лучше ориентироваться в коде
+const intervalID = setInterval(() => {
+  console.log('Привет!');
+}, 1000);
+
+// Отменить регулярное использование кода
+
+clearInterval(intervalID);
+
+console.log('Сообщение №1');
+setTimeout(() => {
+  console.log('Сообщение №2 с задержкой 0 (?) миллисекунд');
+});
+console.log('Сообщение №3');
+// нсачала выведется №1 , потом №3, а потом уже №2
