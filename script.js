@@ -1,47 +1,52 @@
-/**
- * BOM (Browser Object Model) - обьектная модель браузера, в рамках которой мы получаем возможность пользоваться специальными обьектами
- */
+console.log('Элемент <body>:', document.body);
 
-console.log('Информация о браузере:', window.navigator);
-console.log('Информация об экране:', window.screen);
-console.log('Информация о URL:', window.location);
-console.log('Информация об истории текущей сессии:', window.history);
+console.log('Родительский элемент над <body>:', document.body.parentElement);
 
-/* Сохранить данные в LocalStorage */
-window.localStorage.setItem('id', JSON.stringify({ id: 123 }));
-
-const id = JSON.parse(
-  /* Получить данные из LocalStorage */
-  window.localStorage.getItem('key-name')
+console.log(
+  'Соседний элемент перед <body>:',
+  document.body.previousElementSibling
 );
 
-/* Отправка на сервер GET-запроса и получение ответа */
-window
-  .fetch('https://jsonplaceholder.typicode.com/users')
-  .then((response) => response.json())
-  .then((users) => console.log('Пользователи:', users));
+console.log('Соседний элемент после <body>:', document.body.nextElementSibling);
 
-/* DOM (Document Object Model) - обьектная модель документа, которая позволяет взаимодействовать с содержимым страницы в виде обьектов */
-console.log(window.document);
-console.dir(window.document);
+console.log('Дочерние элементы <body>:', document.body.children);
 
-/* Все браузерное окружение */
-console.log(window);
+console.log('Элемент <html>:', document.document);
 
-/* Основной JavaScript */
-console.log(window.Math);
-console.log(window.Object.keys({ name: 'Александр', age: 28 }));
-console.log(window.Number('123'));
-console.log(window.Boolean(0));
+console.log(
+  'Родительский элемент над <html>:',
+  document.documentElement.parentElement
+);
 
-/* BOM */
-console.log(window.navigator);
-console.log(window.screen);
-console.log(window.location);
-console.log(window.history);
-console.log(window.frames);
-console.log(window.fetch);
-console.log(window.XMLHttpRequest);
+console.log(
+  'Родительский элемент над <html>:',
+  document.documentElement.parentNode
+);
 
-/* DOM */
-console.log(window.document);
+const divElement = document.body.children[0];
+
+console.log('Элемент <div>:', divElement);
+
+console.log('Соседний элемент перед <div>:', divElement.previousElementSibling);
+
+console.log('Соседний узел перед <div>:', divElement.previousSibling);
+
+console.log('Соседний элемент после <div>:', divElement.nextElementSibling);
+
+console.log('Соседний узел после <div>:', divElement.nextSibling);
+
+console.log(
+  'Первый дочерний элемент внутри <div>:',
+  divElement.firstElementChild
+);
+
+console.log('Первый дочерний узел внутри <div>:', divElement.firstChild);
+
+console.log(
+  'Последний дочерний элемент внутри <div>:',
+  divElement.lastElementChild
+);
+
+console.log('Последний дочерний узел внутри <div>:', divElement.lastChild);
+
+console.log('Дочерние узлы внутри <div>:', divElement.childNodes);
