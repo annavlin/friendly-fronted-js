@@ -1,21 +1,47 @@
-// import initTabs from './tabs.js';
-// import { initModals } from './modals.js';
-// import { initSliders } from './sliders.js';
+/**
+ * BOM (Browser Object Model) - обьектная модель браузера, в рамках которой мы получаем возможность пользоваться специальными обьектами
+ */
 
-// initTabs();
-// initModals();
-// initSliders();
+console.log('Информация о браузере:', window.navigator);
+console.log('Информация об экране:', window.screen);
+console.log('Информация о URL:', window.location);
+console.log('Информация об истории текущей сессии:', window.history);
 
-// import logCat, { a, b, c } from './constans.js';
-import * as constans from './constans.js'; //- все импортированные файлы будут хранить в этом новосозданном файле
+/* Сохранить данные в LocalStorage */
+window.localStorage.setItem('id', JSON.stringify({ id: 123 }));
 
-console.log('constans:', constans);
+const id = JSON.parse(
+  /* Получить данные из LocalStorage */
+  window.localStorage.getItem('key-name')
+);
 
-console.log(constans.a);
-console.log(constans.b);
-console.log(constans.c);
-constans.default();
+/* Отправка на сервер GET-запроса и получение ответа */
+window
+  .fetch('https://jsonplaceholder.typicode.com/users')
+  .then((response) => response.json())
+  .then((users) => console.log('Пользователи:', users));
 
-// при импорте файл импортируется только один раз, джае если он упомянался несколько раз
+/* DOM (Document Object Model) - обьектная модель документа, которая позволяет взаимодействовать с содержимым страницы в виде обьектов */
+console.log(window.document);
+console.dir(window.document);
 
-// МОДУЛЬ- это JS- файл, который подключается к разметку через атребут type = "module"- ставит после других действий
+/* Все браузерное окружение */
+console.log(window);
+
+/* Основной JavaScript */
+console.log(window.Math);
+console.log(window.Object.keys({ name: 'Александр', age: 28 }));
+console.log(window.Number('123'));
+console.log(window.Boolean(0));
+
+/* BOM */
+console.log(window.navigator);
+console.log(window.screen);
+console.log(window.location);
+console.log(window.history);
+console.log(window.frames);
+console.log(window.fetch);
+console.log(window.XMLHttpRequest);
+
+/* DOM */
+console.log(window.document);
