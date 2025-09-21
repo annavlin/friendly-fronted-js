@@ -1,52 +1,49 @@
-console.log('Элемент <body>:', document.body);
+const buttonElement = document.getElementById('myButton');
+console.log('buttonElement:', buttonElement);
 
-console.log('Родительский элемент над <body>:', document.body.parentElement);
+// можно найти элемент другим способом
+console.log('Кнопка:', myButton); // не очень хорошая практика из-за того, что легко получить ошибку в коде
 
-console.log(
-  'Соседний элемент перед <body>:',
-  document.body.previousElementSibling
-);
+// Если не указан id
 
-console.log('Соседний элемент после <body>:', document.body.nextElementSibling);
+const buttonElement1 = document.querySelector('button');
+const buttonElement2 = document.querySelector('#myButton'); // если был бы задан id
+const buttonElement3 = document.querySelector('.my-button'); // если был бы задан class
 
-console.log('Дочерние элементы <body>:', document.body.children);
+console.log('Кнопка:', buttonElement1);
 
-console.log('Элемент <html>:', document.document);
+// Если нужно получить доступ не к одному элементу, а к нескольким querySelector не подойдет
 
-console.log(
-  'Родительский элемент над <html>:',
-  document.documentElement.parentElement
-);
+const listItemElements = document.querySelectorAll('.list .item');
+console.log('Элементы списка:', listItemElements);
 
-console.log(
-  'Родительский элемент над <html>:',
-  document.documentElement.parentNode
-);
+listItemElements.forEach((element) => {
+  console.log('Элемент списка:', element);
+});
 
-const divElement = document.body.children[0];
+// Мы можем использовать querySelector и querySelectorAll у любых DOM - элементов
 
-console.log('Элемент <div>:', divElement);
+const wrapperElement = document.querySelector('#wrapper');
+console.log('wrapperElement:', wrapperElement);
 
-console.log('Соседний элемент перед <div>:', divElement.previousElementSibling);
+const listElement = wrapperElement?.querySelector('.list');
+console.log('listElement:', listElement);
 
-console.log('Соседний узел перед <div>:', divElement.previousSibling);
+const listItemElements1 = listElement?.querySelectorAll('.item');
+console.log('listItemElements1:', listItemElements1);
 
-console.log('Соседний элемент после <div>:', divElement.nextElementSibling);
+// Нахождение ближайшего родительского элемента по селектору - метод closet
 
-console.log('Соседний узел после <div>:', divElement.nextSibling);
+const thirdBoxElement = document.querySelector('.box-3');
 
-console.log(
-  'Первый дочерний элемент внутри <div>:',
-  divElement.firstElementChild
-);
+const firstBoxElement = thirdBoxElement.closest('.box-1'); // применяется при обработке и делегировании событий
+console.log('firstBoxElement:', firstBoxElement);
 
-console.log('Первый дочерний узел внутри <div>:', divElement.firstChild);
+const boxElements = document.querySelectorAll('.box-1, .box-2, .box-3');
+console.log('boxElements:', boxElements);
 
-console.log(
-  'Последний дочерний элемент внутри <div>:',
-  divElement.lastElementChild
-);
+// лучше всего обращаться по селектору класса, но лучше обращаться к data- атрибуту (data-js-имя компонента)
 
-console.log('Последний дочерний узел внутри <div>:', divElement.lastChild);
-
-console.log('Дочерние узлы внутри <div>:', divElement.childNodes);
+const sliderElement = document.querySelector('[data-js-slider]');
+const sliderListElement = document.querySelector('[data-js-slider-list]');
+const sliderSlideElement = document.querySelectorAll('[data-js-slider-slide]');
