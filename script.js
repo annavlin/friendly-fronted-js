@@ -1,49 +1,51 @@
-const buttonElement = document.getElementById('myButton');
-console.log('buttonElement:', buttonElement);
+const formElement = document.querySelector('.form');
+const loginInputElement = document.querySelector('.form__input[name="login"]');
+const passwordInputElement = document.querySelector(
+  '.form__input[name="password"]'
+);
+const submitButtonElement = document.querySelector('.form__button');
 
-// можно найти элемент другим способом
-console.log('Кнопка:', myButton); // не очень хорошая практика из-за того, что легко получить ошибку в коде
+console.dir(formElement);
+console.dir(loginInputElement);
+console.dir(passwordInputElement);
+console.dir(submitButtonElement);
 
-// Если не указан id
+// для получения значения любого атрибута элемента есть метод getAribute
 
-const buttonElement1 = document.querySelector('button');
-const buttonElement2 = document.querySelector('#myButton'); // если был бы задан id
-const buttonElement3 = document.querySelector('.my-button'); // если был бы задан class
+// установим setAttribute
 
-console.log('Кнопка:', buttonElement1);
+formElement.setAttribute('qwerty', '0');
+formElement.setAttribute('data-some-value', '1'); // в качестве атрибутов могут быть только строки
 
-// Если нужно получить доступ не к одному элементу, а к нескольким querySelector не подойдет
+console.log('formElement qwerty:', formElement.getAttribute('qwerty'));
+console.log(
+  'formElement data-some-value:',
+  formElement.getAttribute('data-some-value')
+);
 
-const listItemElements = document.querySelectorAll('.list .item');
-console.log('Элементы списка:', listItemElements);
+// чтобы совсем удалить атрибут, нужно воспользоваться remove
 
-listItemElements.forEach((element) => {
-  console.log('Элемент списка:', element);
-});
+formElement.removeAttribute('qwerty');
+formElement.removeAttribute('data-some-value');
 
-// Мы можем использовать querySelector и querySelectorAll у любых DOM - элементов
+console.log('formElement qwerty:', formElement.getAttribute('qwerty'));
+console.log(
+  'formElement data-some-value:',
+  formElement.getAttribute('data-some-value')
+);
 
-const wrapperElement = document.querySelector('#wrapper');
-console.log('wrapperElement:', wrapperElement);
+// hasAttribute- позволяет проверить существует ли определенный атрибут у элемента
 
-const listElement = wrapperElement?.querySelector('.list');
-console.log('listElement:', listElement);
+console.log('formElement has qwerty:', formElement.hasAttribute('qwerty'));
 
-const listItemElements1 = listElement?.querySelectorAll('.item');
-console.log('listItemElements1:', listItemElements1);
+console.log(
+  'formElement has data-some-value:',
+  formElement.hasAttribute('data-some-value')
+);
 
-// Нахождение ближайшего родительского элемента по селектору - метод closet
+// value у полей ввода синхронизируются только в одну сторону. Лучше не манипулировать value четез get и set атрибуты
 
-const thirdBoxElement = document.querySelector('.box-3');
-
-const firstBoxElement = thirdBoxElement.closest('.box-1'); // применяется при обработке и делегировании событий
-console.log('firstBoxElement:', firstBoxElement);
-
-const boxElements = document.querySelectorAll('.box-1, .box-2, .box-3');
-console.log('boxElements:', boxElements);
-
-// лучше всего обращаться по селектору класса, но лучше обращаться к data- атрибуту (data-js-имя компонента)
+console.log('Атрибуты loginInputElement:', loginInputElement.attributes); // показывает все атрибуты у элемента
 
 const sliderElement = document.querySelector('[data-js-slider]');
-const sliderListElement = document.querySelector('[data-js-slider-list]');
-const sliderSlideElement = document.querySelectorAll('[data-js-slider-slide]');
+console.log(sliderElement.getAttribute('data-js-slider'));
