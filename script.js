@@ -1,51 +1,59 @@
-const formElement = document.querySelector('.form');
-const loginInputElement = document.querySelector('.form__input[name="login"]');
-const passwordInputElement = document.querySelector(
-  '.form__input[name="password"]'
-);
-const submitButtonElement = document.querySelector('.form__button');
+const boxElement = document.querySelector('.box');
 
-console.dir(formElement);
-console.dir(loginInputElement);
-console.dir(passwordInputElement);
-console.dir(submitButtonElement);
+// boxElement.style.position = 'absolute';
+// boxElement.style.top = '40px';
+// boxElement.style.left = '80px';
+// boxElement.style.borderWidth = '10px';
 
-// для получения значения любого атрибута элемента есть метод getAribute
+// полностью переписываем данные
 
-// установим setAttribute
+// boxElement.style.cssText = `
+// position: absolute;
+// top: 40px;
+// left: 80px;
+// width: 80px;
+// border-width: 10px
+// `;
 
-formElement.setAttribute('qwerty', '0');
-formElement.setAttribute('data-some-value', '1'); // в качестве атрибутов могут быть только строки
+// если надо просто добавить, то пишем +=
 
-console.log('formElement qwerty:', formElement.getAttribute('qwerty'));
-console.log(
-  'formElement data-some-value:',
-  formElement.getAttribute('data-some-value')
-);
+// boxElement.style.cssText += `
+// position: absolute;
+// top: 40px;
+// left: 80px;
+// width: 80px;
+// border-width: 2px
+// `;
 
-// чтобы совсем удалить атрибут, нужно воспользоваться remove
+console.dir(boxElement);
+console.log(boxElement.style);
 
-formElement.removeAttribute('qwerty');
-formElement.removeAttribute('data-some-value');
-
-console.log('formElement qwerty:', formElement.getAttribute('qwerty'));
-console.log(
-  'formElement data-some-value:',
-  formElement.getAttribute('data-some-value')
-);
-
-// hasAttribute- позволяет проверить существует ли определенный атрибут у элемента
-
-console.log('formElement has qwerty:', formElement.hasAttribute('qwerty'));
+// для глобального поиска в window
 
 console.log(
-  'formElement has data-some-value:',
-  formElement.hasAttribute('data-some-value')
+  'Вычисление значения стилей boxElement:',
+  getComputedStyle(boxElement).width
 );
 
-// value у полей ввода синхронизируются только в одну сторону. Лучше не манипулировать value четез get и set атрибуты
+// можно манипулировать с css элементами с помощью classList
 
-console.log('Атрибуты loginInputElement:', loginInputElement.attributes); // показывает все атрибуты у элемента
+boxElement.classList.add('red', 'big');
 
-const sliderElement = document.querySelector('[data-js-slider]');
-console.log(sliderElement.getAttribute('data-js-slider'));
+// чтобы удалить класс, пользоваться remove
+
+boxElement.classList.remove('red', 'big');
+
+// toggle - добавляет класс если у элемента его не было, удаляет класс у элемента если он есть
+
+boxElement.classList.toggle('red');
+
+// contains - проверяет имеет ли элемент опредеделенный класс и возвращает результат как true или false
+
+console.log(
+  'Есть ли класс "bx" у элемента boxElement?',
+  boxElement.classList.contains('bx')
+);
+
+// Управление CSS-переменными в JS.
+
+boxElement.style.setProperty('--border-color', 'blue'); // использовать только для установки свойств цсс- переменных
