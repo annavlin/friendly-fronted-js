@@ -1,57 +1,49 @@
 const boxElement = document.querySelector('.box');
 
-console.log('Полная ширина:', boxElement.offsetWidth);
-console.log('Полная высота:', boxElement.offsetHeight);
+// console.log('Текстовое содержимое boxElement:', boxElement.textContent);
 
-console.log('Ширина левой рамки:', boxElement.clientLeft);
-console.log('Ширина верхней рамки:', boxElement.clientTop);
+// textContent- омжем получать информацию по контексту содержимого, не позволяет вставить HTML- разметку, в этом случае можно использовать innerHTML (всегда заменяет внутренности на новые, даже если используем +=)
 
-console.log(
-  'Расстояние от левой границы элемента до внутренностей:',
-  boxElement.clientLeft
-);
+// boxElement.innerHTML = `Обновленный текст <p> Новый параграф <p>`;
 
-console.log(
-  'Расстояние от верхней границы элемента до внутренностей:',
-  boxElement.clientTop
-);
+// outerHTML - с помощью этого свойства можно получить строку с разметкой элементов, включая сам элемент
+const firstBoxElement = document.querySelector('.box-1');
+const secondBoxElement = document.querySelector('.box-2');
 
-console.log('Ширина без учета рамки и скроллбара:', boxElement.clientWidth);
+// const thirdParagraphElement = document.querySelector('./paragraph-3');
+// const fourthParagraphElement = document.querySelector('./paragraph-4');
+// const fifthParagraphElement = document.querySelector('./paragraph-5');
 
-console.log('Высота без учета рамки и скроллбара:', boxElement.clientHeight);
+const justText = 'Просто текст';
+// создаем элемент
+const getNewParagraphElement = () => {
+  const newParagraphElement = document.createElement('p');
+  newParagraphElement.textContent = 'Новый параграф';
+  return newParagraphElement;
+};
 
-console.log(
-  'Ширина без учета рамки, включая прокручиваемую область: ',
-  boxElement.scrollWidth
-);
+// const boxElement = document.querySelector('.box');
+const getNewArticleElement = () => {
+  const newArticleElement = document.createElement('article');
+  newArticleElement.textContent = 'Новый элемент <article>';
+  return newArticleElement;
+};
+firstBoxElement.append(getNewParagraphElement(), getNewArticleElement());
+// если надо добавить в начало, воспользуемся prepend
 
-console.log(
-  'Высота без учета рамки, включая прокручиваемую область: ',
-  boxElement.scrollHeight
-);
+secondBoxElement.prepend(getNewParagraphElement(), getNewArticleElement());
 
-console.log(
-  'Возможна горизонтальная прокрутка:',
-  boxElement.scrollWidth > boxElement.clientWidth
-);
+// еще есть before и after, работают также как и append, prepend
 
-console.log(
-  'Возможна вертикальная прокрутка:',
-  boxElement.scrollHeight > boxElement.clientHeight
-);
+// чтобы поменять информацию
 
-boxElement.scroll(10, 50); // Прокрутка содержимого элемента на 10 px вправо и 50 px вниз относительно начального положения
+// thirdBoxElement.replaceWith(getNewParagraphElement(), getNewArticleElement());
 
-console.log(
-  'Ширина невидимой уже прокрученной по горизонтали области: ',
-  boxElement.scrollLeft
-);
+// удалить элемент из дом-дерева с помощью remove
+firstBoxElement.remove();
 
-console.log(
-  'Высота невидимой уже прокрученной по вертикали области: ',
-  boxElement.scrollTop
-);
+// клонирование какого-либо элемента
+const secondBoxElementClone = secondBoxElement.cloneNode(true);
+secondBoxElement.after(secondBoxElementClone); // поверхностное клонирование, которое не учитывает внутреннее содержимое
 
-// получаем координаты различных элементо относительно окна браузера с помощью getBoundingClientRect()
-
-// Координаты позиции скролла страницы - window.scrollX, window.scrollY
+// чтобы произошло глубокое клонирование, нужно передать true в cloneNode
