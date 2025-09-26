@@ -47,3 +47,5 @@ const secondBoxElementClone = secondBoxElement.cloneNode(true);
 secondBoxElement.after(secondBoxElementClone); // поверхностное клонирование, которое не учитывает внутреннее содержимое
 
 // чтобы произошло глубокое клонирование, нужно передать true в cloneNode
+
+// чтобы перемещать можно пользоваться before, after, либо же альтернативой inserAdjacentElement
