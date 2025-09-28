@@ -1,51 +1,51 @@
-const boxElement = document.querySelector('.box');
+// const logMessage = () => {
+//   console.log('Произошел клик');
+// };
 
-// console.log('Текстовое содержимое boxElement:', boxElement.textContent);
-
-// textContent- омжем получать информацию по контексту содержимого, не позволяет вставить HTML- разметку, в этом случае можно использовать innerHTML (всегда заменяет внутренности на новые, даже если используем +=)
-
-// boxElement.innerHTML = `Обновленный текст <p> Новый параграф <p>`;
-
-// outerHTML - с помощью этого свойства можно получить строку с разметкой элементов, включая сам элемент
-const firstBoxElement = document.querySelector('.box-1');
-const secondBoxElement = document.querySelector('.box-2');
-
-// const thirdParagraphElement = document.querySelector('./paragraph-3');
-// const fourthParagraphElement = document.querySelector('./paragraph-4');
-// const fifthParagraphElement = document.querySelector('./paragraph-5');
-
-const justText = 'Просто текст';
-// создаем элемент
-const getNewParagraphElement = () => {
-  const newParagraphElement = document.createElement('p');
-  newParagraphElement.textContent = 'Новый параграф';
-  return newParagraphElement;
+const buttonElement = document.querySelector('button');
+buttonElement.onclick = () => {
+  console.log('Произошел клик');
 };
 
-// const boxElement = document.querySelector('.box');
-const getNewArticleElement = () => {
-  const newArticleElement = document.createElement('article');
-  newArticleElement.textContent = 'Новый элемент <article>';
-  return newArticleElement;
+// или же можно записать немного по-другому
+
+const logMessage = () => {
+  console.log('Произошел клик');
 };
-firstBoxElement.append(getNewParagraphElement(), getNewArticleElement());
-// если надо добавить в начало, воспользуемся prepend
 
-secondBoxElement.prepend(getNewParagraphElement(), getNewArticleElement());
+buttonElement.onclick = logMessage;
+// у этих двух вариантах есть минус- нельзя повесить на один элемент несколько обработчиков одного события
 
-// еще есть before и after, работают также как и append, prepend
+// самый правильный и удобный вариант ( можно повесить несколько действий на один элеемнтов, и это все будет работать корректно)
 
-// чтобы поменять информацию
+buttonElement.addEventListener('click', () => {
+  console.log(1);
+});
 
-// thirdBoxElement.replaceWith(getNewParagraphElement(), getNewArticleElement());
+buttonElement.addEventListener('click', () => {
+  console.log(2);
+});
 
-// удалить элемент из дом-дерева с помощью remove
-firstBoxElement.remove();
+// в некоторых случаях можно делать так =>
 
-// клонирование какого-либо элемента
-const secondBoxElementClone = secondBoxElement.cloneNode(true);
-secondBoxElement.after(secondBoxElementClone); // поверхностное клонирование, которое не учитывает внутреннее содержимое
+const logNumberOne = () => {
+  console.log(1);
+};
 
-// чтобы произошло глубокое клонирование, нужно передать true в cloneNode
+buttonElement.addEventListener('click', logNumberOne);
 
-// чтобы перемещать можно пользоваться before, after, либо же альтернативой inserAdjacentElement
+const firstButtonElement = document.querySelector('.button-1');
+
+const logMessage1 = () => {
+  console.log('Произошел клик');
+};
+
+firstButtonElement.addEventListener('click', logMessage1);
+
+const secondButtonElement = document.querySelector('.button-2');
+
+secondButtonElement.addEventListener('click', () => {
+  firstButtonElement.removeEventListener('click', logMessage1);
+});
+
+// target- показывает в каком дом- элементе произошло событие
