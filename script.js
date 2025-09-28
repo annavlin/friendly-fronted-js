@@ -1,51 +1,51 @@
-// const logMessage = () => {
-//   console.log('Произошел клик');
-// };
+const firstBoxElement = document.querySelector('.box-1');
+const secondBoxElement = document.querySelector('.box-2');
+const thirdBoxElement = document.querySelector('.box-3');
 
-const buttonElement = document.querySelector('button');
-buttonElement.onclick = () => {
-  console.log('Произошел клик');
-};
-
-// или же можно записать немного по-другому
-
-const logMessage = () => {
-  console.log('Произошел клик');
-};
-
-buttonElement.onclick = logMessage;
-// у этих двух вариантах есть минус- нельзя повесить на один элемент несколько обработчиков одного события
-
-// самый правильный и удобный вариант ( можно повесить несколько действий на один элеемнтов, и это все будет работать корректно)
-
-buttonElement.addEventListener('click', () => {
-  console.log(1);
+firstBoxElement.addEventListener('click', (event) => {
+  console.log('Клик по box-1', event.target, event.currentTarget);
 });
 
-buttonElement.addEventListener('click', () => {
-  console.log(2);
+secondBoxElement.addEventListener('click', (event) => {
+  console.log('Клик по box-2', event.target, event.currentTarget);
 });
 
-// в некоторых случаях можно делать так =>
-
-const logNumberOne = () => {
-  console.log(1);
-};
-
-buttonElement.addEventListener('click', logNumberOne);
-
-const firstButtonElement = document.querySelector('.button-1');
-
-const logMessage1 = () => {
-  console.log('Произошел клик');
-};
-
-firstButtonElement.addEventListener('click', logMessage1);
-
-const secondButtonElement = document.querySelector('.button-2');
-
-secondButtonElement.addEventListener('click', () => {
-  firstButtonElement.removeEventListener('click', logMessage1);
+thirdBoxElement.addEventListener('click', (event) => {
+  console.log('Клик по box-3', event.target, event.currentTarget);
 });
 
-// target- показывает в каком дом- элементе произошло событие
+// альтернативная запись event, event.target, event.currentTarget
+
+firstBoxElement.addEventListener('click', function () {
+  console.log('Клик по box-1', this);
+});
+
+secondBoxElement.addEventListener(
+  'click',
+  function () {
+    console.log('Клик по box-2', this);
+  },
+  true
+);
+
+thirdBoxElement.addEventListener('click', function () {
+  console.log('Клик по box-3', this);
+});
+
+//  Концепция ' Всплытие события '- происходит с целевого самого глубокого элемента вверх от корневой точки дом-дерева до самого document. Иногда требуется перехватитть определенное действие на каком-то этапе и отменить его дальнейшее всплытие.
+
+thirdBoxElement.addEventListener('click', (event) => {
+  console.log('Клик по box-3'), event.stopImediatePropagation();
+});
+
+// похожий метод (stopImediatePropagation (смотреть выше)) - по идее остальные методы где еще одни всплывы не должны сработать, только 'клик по box-3'
+
+thirdBoxElement.addEventListener('click', () => {
+  console.log('Еще один клик по box-3');
+});
+
+thirdBoxElement.addEventListener('click', () => {
+  console.log('И еще один клик по box-3');
+});
+
+/// лялялял
